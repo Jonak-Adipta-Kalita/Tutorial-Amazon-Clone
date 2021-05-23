@@ -41,7 +41,7 @@ export default function Product({ id, title, price, description, category, image
 			<div className="mb-5">
 				<Currency 
 					quantity={price}
-					currency="GBP" 
+					currency="INR" 
 				/>
 			</div>
 			{hasPrime && (

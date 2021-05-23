@@ -37,7 +37,7 @@ export default function CheckoutProduct({
 				<p className="text-xs my-2 line-clamp-3">{description}</p>
 				<Currency 
 					quantity={price} 
-					currency="GBP" 
+					currency="INR" 
 				/>
 				{hasPrime && (
 					<div className="flex items-center space-x-2">
