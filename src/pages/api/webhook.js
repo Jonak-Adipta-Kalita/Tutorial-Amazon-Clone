@@ -1,10 +1,10 @@
 import { buffer } from 'micro';
 import * as admin from 'firebase-admin';
 
-const serviceAccount = require(../../../permissions.json);
+const serviceAccount = require("../../../permissions.json");
 const app = !admin.apps.length 
 	? admin.initializeApp({
-		credential: admin.credential.cert(serviceAccount);
+		credential: admin.credential.cert(serviceAccount),
 	})
 	: admin.app();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -34,12 +34,13 @@ export default async (req, res) => {
 		const payload = requestBuffer.toString();
 		const sig = req.headers['stripe-signatures'];
 		let event;
-		
+
 		try {
 			event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
 		} catch (err) {
 			return res.status(400).send("Webhook Error: ${err.message}");
 		};
+
 		if (event.type === 'checkout.session.completed') {
 			const session = event.data.objects;
 			return fullfillOrder(session)
